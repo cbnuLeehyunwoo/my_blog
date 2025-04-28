@@ -2,13 +2,19 @@ import { getPostData, getAllPosts } from '@/lib/posts';
 import { notFound } from 'next/navigation';
 
 export async function generateStaticParams() {
-  const posts = getAllPosts();
+  const posts = await getAllPosts();
+  console.log("Posts: ", posts);
+
   return posts.map((post) => ({
-    slug: post.id,
+    params: {  // ← params 키 추가
+      slug: post.id
+    }
   }));
 }
 
 export async function generateMetadata({ params }) {
+  console.log("Received slug:", params.slug); // 로그 추가
+
   const post = await getPostData(params.slug);
   if (!post) return {};
 
