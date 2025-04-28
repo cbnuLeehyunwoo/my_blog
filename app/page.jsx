@@ -1,18 +1,22 @@
-import { getSortedPostsData } from '@/lib/posts';
+import { getSortedPostsData } from '../lib/posts';
 import Link from 'next/link';
+import '../styles/globals.css';
 
-export default async function Home() {
+export default function Home() {
   const allPostsData = getSortedPostsData();
 
   return (
-    <div className="container">
+    <div className="post-list">
       <h1>블로그</h1>
       <ul>
-        {allPostsData.map(({ id, date, title }) => (
-          <li key={id}>
-            <Link href={`/posts/${id}`}>{title}</Link>
-            <br />
-            <small>{date}</small>
+        {allPostsData.map(({ slug, date, title }) => (
+          <li key={slug} className="post-item">
+            <Link href={`/posts/${slug}`}>
+              <div className="post-card">
+                <h2>{title}</h2>
+                <p>{date}</p>
+              </div>
+            </Link>
           </li>
         ))}
       </ul>
