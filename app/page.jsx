@@ -1,6 +1,6 @@
 import { getSortedPostsData } from '../lib/posts';
 import Link from 'next/link';
-import '../next/styles/globals.css';
+import '../.next/styles/globals.css';
 
 export default function Home() {
   const allPostsData = getSortedPostsData();
